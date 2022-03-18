@@ -8,7 +8,6 @@ Add Post
 
 {% block content %}
 
-{% if user.is_authenticated %}
 
     <h1>Create Post</h1>
     <div class="form-group">
@@ -24,10 +23,5 @@ Add Post
         document.getElementById("author").value = name;
     </script>
 
-{% else %}
-
-<h1>Page Not Found! Error 404..</h1>
-
-{% endif %}
 
 {% endblock content %}
