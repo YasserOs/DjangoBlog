@@ -1,0 +1,29 @@
+
+{% extends 'base.html' %}
+{% block content %}
+     
+
+<h1>Posts</h1>
+
+<ul>
+{% for post in object_list %}
+    <li>
+        <a class="btn btn-primary" href="{% url 'article_detail' post.pk %}">
+            {{post.title}}
+        </a> 
+        
+         &emsp; - {{post.author.first_name}} {{post.author.last_name}} &ensp;/&emsp;
+         {{ post.publish_date }} - &emsp;
+         <small> <a class="btn btn-warning" href="{% url 'update_post' post.pk %}">Edit</a> </small> 
+         &emsp;<small> <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete</a> </small> <br/><br/>
+         {{ post.body }}
+         <br/>
+        <mark>{{ post.category }}</mark>
+         <hr/>
+    </li>
+    
+{% endfor %}
+</ul>
+
+
+{% endblock %}

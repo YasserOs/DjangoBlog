@@ -1,0 +1,33 @@
+<!-- {% extends 'base.html' %}
+
+{% block head_title %}
+
+Category Page
+
+{% endblock head_title %}
+
+
+
+{% block content %}
+
+
+<h1>Categories</h1>
+
+{% if category_post %}
+<h2> {{ cats }} </h2>
+{% for post in category_post %}
+
+<h3>
+    <a href="{% url 'article_detail' post.pk %}">
+        {{post.title}}
+    </a>
+     - {{post.author.first_name}} {{post.author.last_name}}
+</h3>
+<p>{{ post.body | linebreaks | truncatewords:100 }}</p>
+{% endfor %}
+
+{% else %}
+<h4>there is no article related to this category</h4>
+
+{% endif %}
+{% endblock content %} -->

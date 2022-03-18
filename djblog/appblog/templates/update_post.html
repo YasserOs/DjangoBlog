@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head_title %}
+
+Edit Post
+
+{% endblock head_title %}
+
+{% block content %}
+
+        <h1>Edit Post - {{ post.title}}</h1>
+        <div class="form-group">
+        <form method= "POST"> {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Update</button>
+        </form>
+        </div>
+    
+
+{% endblock content %}
