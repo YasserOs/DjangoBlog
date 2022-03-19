@@ -1,3 +1,4 @@
+from dataclasses import fields
 from django.shortcuts import render 
 from django.views.generic import (
     ListView as lv, 
@@ -27,8 +28,9 @@ class AddPostView(cv):
 
 class CategoryView(cv):
     model = Category
-    form_class = PostForm
+   # form_class = PostForm
     template_name = 'add_category.html'
+    fields = '__all__'
 
 
 class UpdatePost(uv):
