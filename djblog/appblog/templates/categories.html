@@ -1,33 +1,32 @@
-<!-- {% extends 'base.html' %}
-
-{% block head_title %}
-
-Category Page
-
-{% endblock head_title %}
-
-
+{% extends 'base.html' %}
 
 {% block content %}
 
 
-<h1>Categories</h1>
 
-{% if category_post %}
-<h2> {{ cats }} </h2>
-{% for post in category_post %}
+{% if category_posts  %}
+    <h1>{{ cats }}</h1> 
+    <ul> 
+        {% for post in category_posts %} 
+                <li><a href="{% url 'article_detail' post.pk %}">{{ post.title }}</a> 
 
-<h3>
-    <a href="{% url 'article_detail' post.pk %}">
-        {{post.title}}
-    </a>
-     - {{post.author.first_name}} {{post.author.last_name}}
-</h3>
-<p>{{ post.body | linebreaks | truncatewords:100 }}</p>
-{% endfor %}
 
+                - {{ post.author.first_name }} {{
+                post.author.last_name }} - 
+                {{ post.post_date }} <small> 
+
+                {% if user.is_authenticated %}
+                    - <a href="{ % url 'update_post'
+                    post.pk %}">(Edit)</a> 
+
+                    <a href="{% url 'delete_post' 
+                    post.pk %}">(Delete)</a> 
+                {% endif %} 
+                </small> <br/> 
+                {{ post.body }}</li> 
+        {% endfor %} 
+    </ul> 
 {% else %}
-<h4>there is no article related to this category</h4>
-
+<h1>Sorry this page does not Exist</h1>
 {% endif %}
-{% endblock content %} -->
+{% endblock %}

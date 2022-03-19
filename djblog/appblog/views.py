@@ -1,3 +1,4 @@
+from dataclasses import fields
 from django.shortcuts import render 
 from django.views.generic import (
     ListView as lv, 
@@ -25,10 +26,11 @@ class AddPostView(cv):
     form_class = PostForm
     template_name = 'add_post.html'
 
-class CategoryView(cv):
+class addCategoryView(cv):
     model = Category
-    form_class = PostForm
+   # form_class = PostForm
     template_name = 'add_category.html'
+    fields = '__all__'
 
 
 class UpdatePost(uv):
@@ -42,4 +44,8 @@ class DeletePost(delv):
     template_name = 'delete_post.html'
     #fields = ['title', 'title_tag', 'body']
     success_url = reverse_lazy("home")
+
+def CategoryView(request,cats):
+    category_posts=Post.objects.filter(category=cats)
+    return render(request,'categories.html',{'cats':cats.title(),'category_posts':category_posts})
 
