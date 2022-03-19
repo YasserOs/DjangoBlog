@@ -2,9 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
      
-
 <h1>Posts</h1>
-
 <div style="display: flex; flex-direction: row; flex-wrap: wrap;  width: 70%; padding: 5 px; border: 2px solid black; justify-content: space-evenly; align-items: center;">
 {% for post in object_list %}
     <div style="width: 300px; height: 300px; margin: 10px; border: 2px solid black; overflow: scroll; text-align: center;">
