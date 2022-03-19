@@ -17,7 +17,7 @@
          <br/>
          {{ post.body }}
          <br/>
-        <mark>{{ post.category }}</mark>
+        <a href="{% url 'category' post.category%}">{{ post.category }}</a>
          <hr/>
     </div>
     
