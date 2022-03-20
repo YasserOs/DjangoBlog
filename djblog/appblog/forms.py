@@ -1,6 +1,8 @@
 from django import forms
 from django.forms import widgets
 from .models import Post, Category
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 #choices = [('politics','politics'), ('sports', 'sports'), ('news', 'news')]
 choices = Category.objects.all().values_list('name', 'name')
@@ -9,6 +11,12 @@ choices_list = []
 
 for i in choices:
     choices_list.append(i)
+
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        # fields = ('__all__')
 
 class PostForm(forms.ModelForm):
     class Meta:
