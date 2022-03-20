@@ -12,6 +12,11 @@ urlpatterns = [
     path('article/<int:pk>/delete', DeletePost.as_view(), name="delete_post"),
     path('login',views.loginPg , name='login'),
     path('signup',views.signupPg , name='signup'),
-    path('signout',views.signoutPg , name='signout')
+    path('signout',views.signoutPg , name='signout'),
+    path('admin_panel',views.AdminPanel , name='admin_panel'),
+    path('admin_posts',views.adminPosts , name='admin_posts'),
+    path('post-add',views.addPost , name='post-add'),
+    path('post-edit/<post_id>',views.editPost , name='post-edit'),
+    path('post-del/<post_id>',views.postDel , name='post-delete')
     
 ]

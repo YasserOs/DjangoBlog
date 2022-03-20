@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% block content %}
+     
+
+<h1>Admin Panel</h1>
+
+<ul>
+    <li >
+        <a  href="{% url 'admin_posts' %}"> Manage Posts </a>
+        
+      </li>
+      <li>
+        <a  href="{% url 'signout' %}"> Manage Users </a>
+
+      </li>
+      <li>
+        <a  href="{% url 'signout' %}"> Manage Categories </a>
+
+      </li>
+</ul>
+
+
+{% endblock %}
