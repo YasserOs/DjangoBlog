@@ -32,7 +32,7 @@ def addPost(request):
         post_form = PostForm(request.POST)
         if post_form.is_valid():
             post_form.save()
-            return redirect('admin_panel')
+            return redirect('admin_posts')
     post_form = PostForm()
     context = {'form': post_form}
     return render(request, 'appblog/templates/add_post.html', context)
@@ -48,6 +48,7 @@ def editPost(request, post_id):
             return redirect('admin_posts')
     context={'form': post_form}
     return render(request, 'appblog/templates/add_post.html', context)
+    
 def postDel(request, post_id):
     post = Post.objects.get(id=post_id)
     post.delete()
