@@ -1,37 +1,32 @@
 from django import forms
-from django.forms import widgets
-from .models import Post, Category
+from .models import Post, Comments, Category, Tags
 
-#choices = [('politics','politics'), ('sports', 'sports'), ('news', 'news')]
-choices = Category.objects.all().values_list('name', 'name')
-
-choices_list = []
-
-for item in choices:
-    choices_list.append(item)
-
-class PostForm(forms.ModelForm):
+class post_form(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'rows':2})) # to change the size of text area field
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'author','category', 'body')
-        widgets = {
-            'title' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your title here!'}),
-            'title_tag' : forms.TextInput(attrs={'class': 'form-control'}),
-            'author' : forms.TextInput(attrs={'class': 'form-control', 'value' : '' , 'id' : 'author', 'type': 'hidden'}),
-            #'author' : forms.Select(attrs={'class': 'form-control', 'value'}),
-            'category' : forms.Select(choices=choices_list, attrs={'class': 'form-control'}),
-            'body' : forms.Textarea(attrs={'class': 'form-control'}),
-        }
-    
-class EditForm(forms.ModelForm):
+        fields = ('title', 'body', 'image', 'category', 'tags')
+
+
+class edit_post_form(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'rows':2})) # to change the size of text area field
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'category', 'body')
+        fields = ('title', 'body', 'image', 'category', 'tags')
 
-        widgets = {
-            'title' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your title here!'}),
-            'title_tag' : forms.TextInput(attrs={'class': 'form-control'}),
-            'category' : forms.Select(choices=choices_list, attrs={'class': 'form-control'}),
-            'body' : forms.Textarea(attrs={'class': 'form-control'}),
-        }
+class comment_form(forms.ModelForm):
+    body = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Write Comment ...'})) # to change the size of text area field
+    class Meta:
+        model = Comments
+        fields = ('body',)
 
+
+class category_form(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name',)
+
+class tags_form(forms.ModelForm):
+    class Meta:
+        model = Tags
+        fields = ('name',)
