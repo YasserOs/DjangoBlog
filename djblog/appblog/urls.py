@@ -1,6 +1,8 @@
 from django.urls import path #,include
 from . import views
-from .views import AddPostView, DetailView, UpdatePost, DeletePost  , CategoryView #, CategoryPageView, LikeView, AddCommentView
+
+from appadmin import views as adminView
+from .views import AddPostView, DetailView, UpdatePost, DeletePost  , CategoryView
 
 urlpatterns = [
     # path('', views.home, name="home"),
@@ -13,10 +15,10 @@ urlpatterns = [
     path('login',views.loginPg , name='login'),
     path('signup',views.signupPg , name='signup'),
     path('signout',views.signoutPg , name='signout'),
-    path('admin_panel',views.AdminPanel , name='admin_panel'),
-    path('admin_posts',views.adminPosts , name='admin_posts'),
-    path('post-add',views.addPost , name='post-add'),
-    path('post-edit/<post_id>',views.editPost , name='post-edit'),
-    path('post-del/<post_id>',views.postDel , name='post-delete')
+    path('admin_panel',adminView.AdminPanel , name='admin_panel'),
+    path('admin_posts',adminView.adminPosts , name='admin_posts'),
+    path('post-add',adminView.addPost , name='post-add'),
+    path('post-edit/<post_id>',adminView.editPost , name='post-edit'),
+    path('post-del/<post_id>',adminView.postDel , name='post-delete')
     
 ]
