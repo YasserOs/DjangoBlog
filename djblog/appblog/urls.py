@@ -6,7 +6,9 @@ from .views import AddPostView, DetailView, UpdatePost, DeletePost  , CategoryVi
 
 urlpatterns = [
     # path('', views.home, name="home"),
-    path('', views.home, name="home"),
+    path('home/', views.home, name="home"),
+    path('home/cat/<catID>', views.categories, name="categories"),
+    
     path('article/<int:pk>', DetailView.as_view(), name="article_detail"),
     path('add_post/', AddPostView.as_view(), name="add_post"),
     path('add-category/', CategoryView.as_view(), name="add_category"),
