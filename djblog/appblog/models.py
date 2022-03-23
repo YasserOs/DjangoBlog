@@ -29,6 +29,7 @@ class Post(models.Model):
     tag = models.ManyToManyField(Tags)
     liked = models.ManyToManyField(User,default=None,blank=True,related_name='liked')
     disliked = models.ManyToManyField(User,default=None,blank=True,related_name='disliked')
+    image = models.ImageField(null=True , upload_to="images/")
     def __str__(self):
         return self.title + ' | ' + str(self.author)
     def get_absolute_url(self):
