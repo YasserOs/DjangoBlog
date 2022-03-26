@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from appblog.models import  Post
+from django.contrib.auth.models import User
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -40,8 +42,24 @@ def editPost(request, post_id):
             return redirect('admin_posts')
     context={'form': post_form}
     return render(request, 'appadmin/templates/add_post.html', context)
-    
+   
 def postDel(request, post_id):
     post = Post.objects.get(id=post_id)
     post.delete()
     return redirect('admin_posts')
+########## users
+
+def adminUsers(request):
+    users = User.objects.all()
+    context = { "object_list" : users}
+    return render(request,'appadmin/templates/users.html', context)
+
+def userBlock(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.is_active= False
+    return redirect('admin_panel')
+
+def userPromote(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.is_superuser=True
+    return redirect('admin_panel')
