@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render 
 from django.views.generic import (
     ListView as lv, 
@@ -7,7 +8,7 @@ from django.views.generic import (
     DeleteView as delv, 
  )
 
-from .models import  Post, Category
+from .models import  Post, Category,Like,Dislike
 from .forms import   PostForm, EditForm,UserForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -61,6 +62,59 @@ def signupPg(request):
         context = {'signup_form': signup_form}
         return render(request, 'appblog/templates/signup.html', context)
 
+def likePost(request):
+    user=request.user
+    if user.is_authenticated:
+        if request.method=='POST':
+            post_id=request.POST.get('post_id')
+            post_object = Post.obgects.get(id=post_id)
+            if user in post_object.liked.all():
+                post_object.liked = post_object.liked.remove(user)
+                post_object.disliked = post_object.disliked.add(user)
+            else:
+                post_object.liked = post_object.liked.add(user)
+                post_object.disliked = post_object.disliked.remove(user)
+
+            post_object.save()
+    return redirect('allposts')
+
+def dislikePost(request):
+    user=request.user
+    if user.is_authenticated:
+        if request.method=='POST':
+            post_id=request.POST.get('post_id')
+            post_object = Post.obgects.get(id=post_id)
+            if user in post_object.liked.all():
+                post_object.liked = post_object.liked.remove(user)
+                post_object.disliked = post_object.disliked.add(user)
+            else:
+                post_object.liked = post_object.liked.add(user)
+                post_object.disliked = post_object.disliked.remove(user)
+
+            post_object.save()
+    return redirect('allposts')
+
+def categories(request, catID):
+   posts = Post.objects.filter(category=catID)
+   form = PostForm()
+   categories= Category.objects.all()
+   context={
+       'allposts':posts,
+       'form':form,
+       'categories':categories,
+   }
+   return render (request,'home.html',context)
+
+
+
+
+
+
+
+
+
+
+
 
 
 class DetailView(dv):
@@ -90,4 +144,6 @@ class DeletePost(delv):
     template_name = 'delete_post.html'
     #fields = ['title', 'title_tag', 'body']
     success_url = reverse_lazy("home")
+
+
 

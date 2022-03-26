@@ -56,10 +56,12 @@ def adminUsers(request):
 
 def userBlock(request, user_id):
     user = User.objects.get(id=user_id)
-    user.is_active= False
-    return redirect('admin_panel')
+    user.is_active= not user.is_active
+    user.save()
+    return redirect('admin_users')
 
 def userPromote(request, user_id):
     user = User.objects.get(id=user_id)
-    user.is_superuser=True
-    return redirect('admin_panel')
+    user.is_superuser= not user.is_superuser
+    user.save()
+    return redirect('admin_users')
