@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from appblog.models import  Post
+from appblog.models import  Post ,Category
 from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import UserCreationForm
@@ -8,7 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
-from appblog.forms import PostForm
+from .forms import PostForm
 # Create your views here.
 # admin CRUD
 @login_required(login_url='login')
@@ -65,3 +65,37 @@ def userPromote(request, user_id):
     user.is_superuser= not user.is_superuser
     user.save()
     return redirect('admin_users')
+
+########## categories
+
+# def adminCategories(request): 
+#     cats = Category.objects.all()
+#     context = { "object_list" : cats}
+#     return render(request,'appadmin/templates/categories.html', context)
+
+# def addCategory(request):
+#     if request.method == 'POST':
+#         post_form = PostForm(request.POST)
+#         if post_form.is_valid():
+#             post_form.save()
+#             return redirect('admin_posts')
+#     post_form = PostForm()
+#     context = {'form': post_form}
+#     return render(request, 'appadmin/templates/add_post.html', context)
+
+# def editCategory(request, post_id):
+#     post = Category.objects.get(id=post_id)
+#     post_form = PostForm(instance=post)
+
+#     if request.method =='POST':
+#         post_form = PostForm(request.POST,instance=post)
+#         if post_form.is_valid():
+#             post_form.save()
+#             return redirect('admin_posts')
+#     context={'form': post_form}
+#     return render(request, 'appadmin/templates/add_post.html', context)
+   
+# def categoryDelete(request, post_id):
+#     post = Post.objects.get(id=post_id)
+#     post.delete()
+#     return redirect('admin_posts')

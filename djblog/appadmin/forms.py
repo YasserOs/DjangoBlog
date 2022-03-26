@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Category
+from appblog.models import Post, Category
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -20,7 +20,7 @@ class UserForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'title_tag', 'author','category', 'body')
+        fields = ('title', 'title_tag', 'author','image','category', 'body')
         widgets = {
             'title' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your title here!'}),
             'title_tag' : forms.TextInput(attrs={'class': 'form-control'}),
