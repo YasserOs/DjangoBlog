@@ -10,8 +10,7 @@ class Category(models.Model):
     name = models.CharField(max_length=120)
     def __str__(self):
         return self.name
-    def get_absolute_url(self):
-        return reverse('home')
+ 
 
 
 class Tags(models.Model):
@@ -32,9 +31,13 @@ class Post(models.Model):
     image = models.ImageField(null=True , upload_to="images/")
     def __str__(self):
         return self.title + ' | ' + str(self.author)
-    def get_absolute_url(self):
-        #return reverse('article_detail', args={str(self.id)})
-        return reverse('home')
+    def comments_count(self):
+        return self.comment_set.all().count()
+    def comments(self):
+        return self.comment_set.all()
+
+    
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

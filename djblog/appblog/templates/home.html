@@ -1,28 +1,41 @@
 
-{% extends 'base.html' %}
-{% block content %}
-     
+  {% extends 'base.html' %}
 
-<h1>Posts</h1>
-<ul>
-{% for post in object_list %}
-    <li>
-        <a class="btn btn-primary" href="{% url 'article_detail' post.pk %}">
-            {{post.title}}
-        </a> 
-        
-         &emsp; - {{post.author.first_name}} {{post.author.last_name}} &ensp;/&emsp;
-         {{ post.publish_date }} - &emsp;
-         <small> <a class="btn btn-warning" href="{% url 'update_post' post.pk %}">Edit</a> </small> 
-         &emsp;<small> <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete</a> </small> <br/><br/>
-         {{ post.body }}
-         <br/>
-        <mark>{{ post.category }}</mark>
-         <hr/>
-    </li>
-    
-{% endfor %}
-</ul>
+  {% block content %}
+
+  <div class="container" style="width:100%; display:flex; ">
+           
+        <div >
+           {% for post in object_list %}
+            <div style="width:65%; ">
+                <div class="comment mt-4 text-justify float-left"> 
+                    <a class="btn btn-primary" href="{% url 'article_detail' post.pk %}">{{post.title}}</a>
+                    <br>
+                    <h4>{{ post.author }}</h4> 
+                    <br>
+                    <h4>{{ post.publish_date }}
+                    <br>
+                     {{ post.body }}
+                     <br/>
+                    <mark>{{ post.category }}</mark>  
+                    <br/>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+       
+        <div >
+            <form id="algin-form">
+                {% for cat in object_list %}
+                <a href="#" style="display: block;"> {{cat.category}}</a>
+                {% endfor %}
+            </form>
+        </div>
+   
+
+  </div>
 
 
 {% endblock %}
+
+  

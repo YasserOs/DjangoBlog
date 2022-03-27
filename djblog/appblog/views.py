@@ -21,7 +21,11 @@ from django.shortcuts import redirect, render
     
 def home(request): 
     posts = Post.objects.all()
-    context = { "object_list" : posts}
+    categories= Category.objects.all()
+    context = { "object_list" : posts,
+                "categories" : categories
+                }
+                
     return render(request,'appblog/templates/home.html', context)
 
 def loginPg(request):
