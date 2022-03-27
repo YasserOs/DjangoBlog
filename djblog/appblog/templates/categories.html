@@ -1,21 +1,13 @@
-<!-- {% extends 'base.html' %}
-
-{% block head_title %}
-
-Category Page
-
-{% endblock head_title %}
-
-
+{% extends 'base.html' %}
 
 {% block content %}
 
 
 <h1>Categories</h1>
 
-{% if category_post %}
+{% if category_posts %}
 <h2> {{ cats }} </h2>
-{% for post in category_post %}
+{% for post in category_posts %}
 
 <h3>
     <a href="{% url 'article_detail' post.pk %}">
@@ -30,4 +22,4 @@ Category Page
 <h4>there is no article related to this category</h4>
 
 {% endif %}
-{% endblock content %} -->
+{% endblock content %}

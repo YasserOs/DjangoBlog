@@ -1,39 +1,53 @@
+{% extends 'base.html' %}
 
-  {% extends 'base.html' %}
-
-  {% block content %}
-
-  <div class="container" style="width:100%; display:flex; ">
-           
-        <div >
-           {% for post in object_list %}
-            <div style="width:65%; ">
-                <div class="comment mt-4 text-justify float-left"> 
-                    <a class="btn btn-primary" href="{% url 'article_detail' post.pk %}">{{post.title}}</a>
-                    <br>
-                    <h4>{{ post.author }}</h4> 
-                    <br>
-                    <h4>{{ post.publish_date }}
-                    <br>
-                     {{ post.body }}
-                     <br/>
-                    <mark>{{ post.category }}</mark>  
-                    <br/>
+{% block content %}
+    <div class="d-flex" id="wrapper" style="background-color:gray;">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper" style="width:300px">
+            <div class="sidebar-heading border-bottom bg-light h3 text-center">Categories</div>
+            <div class="list-group list-group-flush d-flex">
+                {% for cat in object_list %}
+                <div class="border border-light align-items-baseline">
+                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block; width:42%;text-decoration:none;border-radius:10px" href="{% url 'category' cat.category %}">{{ cat.category }}</a>
+                    <button class="btn btn-success" style="width:24%;font-size:0.7rem">Subscribe</button>
+                    <button class="btn btn-danger" style="width:30%;font-size:0.7rem">Unsubscribe</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+            <!-- Page content-->
+            <div class="container" >
+                <div class="col-md-12 col-lg-12"  >
+                    {% for post in object_list %}
+                        <article class="post vt-post" style=" background-color:white;margin-bottom: 25px; margin-top:10px;">
+                            <div class="row" >
+                                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                                    <div class="post-type post-img">
+                                        <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="img-responsive" alt="image post"></a>
+                                    </div>
+                                    <div class="author-info author-info-3">
+                                        <ul class="list-inline">
+                                            <li>
+                                                <div class="info">
+                                                    <strong>{{ post.publish_date}}</strong></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                                    <div class="caption">
+                                        <h3 class="md-heading"><a href="#">{{post.title}}</a></h3>
+                                        <p>{{post.body|slice:":200" }}</p>
+                                        <a href="{% url 'category' post.category %}"> {{post.category}}</a>
+                                        <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
-        </div>
-       
-        <div >
-            <form id="algin-form">
-                {% for cat in object_list %}
-                <a href="#" style="display: block;"> {{cat.category}}</a>
-                {% endfor %}
-            </form>
-        </div>
-   
-
-  </div>
+    </div>
 
 
 {% endblock %}
