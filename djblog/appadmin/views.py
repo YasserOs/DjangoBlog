@@ -23,7 +23,7 @@ def adminPosts(request):
 
 def addPost(request):
     if request.method == 'POST':
-        post_form = PostForm(request.POST)
+        post_form = PostForm(request.POST,request.FILES)
         if post_form.is_valid():
             post_form.save()
             return redirect('admin_posts')
@@ -36,7 +36,7 @@ def editPost(request, post_id):
     post_form = PostForm(instance=post)
 
     if request.method =='POST':
-        post_form = PostForm(request.POST,instance=post)
+        post_form = PostForm(request.POST,request.FILES,instance=post)
         if post_form.is_valid():
             post_form.save()
             return redirect('admin_posts')
