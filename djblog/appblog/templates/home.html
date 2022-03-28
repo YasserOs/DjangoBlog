@@ -6,9 +6,9 @@
         <div class="border-end bg-white" id="sidebar-wrapper" style="width:300px">
             <div class="sidebar-heading border-bottom bg-light h3 text-center">Categories</div>
             <div class="list-group list-group-flush d-flex">
-                {% for cat in object_list %}
+                {% for cat in categories %}
                 <div class="border border-light align-items-baseline">
-                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block; width:42%;text-decoration:none;border-radius:10px" href="{% url 'category' cat.category %}">{{ cat.category }}</a>
+                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block; width:42%;text-decoration:none;border-radius:10px" href="{% url 'category' cat.name %}">{{ cat.name }}</a>
                     <button class="btn btn-success" style="width:24%;font-size:0.7rem">Subscribe</button>
                     <button class="btn btn-danger" style="width:30%;font-size:0.7rem">Unsubscribe</button>
                 </div>

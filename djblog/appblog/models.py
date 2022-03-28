@@ -24,7 +24,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField(null=True, blank=True)
     publish_date = models.DateField(auto_now_add=True)
-    category = models.CharField(max_length=120, default='uncategorized')
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tags)
     liked = models.ManyToManyField(User,default=None,blank=True,related_name='liked')
     disliked = models.ManyToManyField(User,default=None,blank=True,related_name='disliked')
