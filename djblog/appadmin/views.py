@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from appblog.models import  Post ,Category
 from django.contrib.auth.models import User
@@ -8,7 +9,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
-from .forms import PostForm
+from .forms import PostForm,CategotyForm
 # Create your views here.
 # admin CRUD
 @login_required(login_url='login')
@@ -68,34 +69,34 @@ def userPromote(request, user_id):
 
 ########## categories
 
-# def adminCategories(request): 
-#     cats = Category.objects.all()
-#     context = { "object_list" : cats}
-#     return render(request,'appadmin/templates/categories.html', context)
+def adminCategories(request): 
+    cats = Category.objects.all()
+    context = { "object_list" : cats}
+    return render(request,'appadmin/templates/categories.html', context)
 
-# def addCategory(request):
-#     if request.method == 'POST':
-#         post_form = PostForm(request.POST)
-#         if post_form.is_valid():
-#             post_form.save()
-#             return redirect('admin_posts')
-#     post_form = PostForm()
-#     context = {'form': post_form}
-#     return render(request, 'appadmin/templates/add_post.html', context)
+def addCategory(request):
+    if request.method == 'POST':
+        category_form = CategotyForm(request.POST)
+        if category_form.is_valid():
+            category_form.save()
+            return redirect('categ-page')
+    category_form = CategotyForm()
+    context = {'form': CategotyForm}
+    return render(request, 'appadmin/templates/add_category.html', context)
 
-# def editCategory(request, post_id):
-#     post = Category.objects.get(id=post_id)
-#     post_form = PostForm(instance=post)
+def editCategory(request, category_id):
+    category = Category.objects.get(id=category_id)
+    categotyForm = CategotyForm(instance=category)
 
-#     if request.method =='POST':
-#         post_form = PostForm(request.POST,instance=post)
-#         if post_form.is_valid():
-#             post_form.save()
-#             return redirect('admin_posts')
-#     context={'form': post_form}
-#     return render(request, 'appadmin/templates/add_post.html', context)
+    if request.method =='POST':
+        categotyForm = CategotyForm(request.POST,instance=category)
+        if categotyForm.is_valid():
+            categotyForm.save()
+            return redirect('categ-page')
+    context={'form': categotyForm}
+    return render(request, 'appadmin/templates/add_category.html', context)
    
-# def categoryDelete(request, post_id):
-#     post = Post.objects.get(id=post_id)
-#     post.delete()
-#     return redirect('admin_posts')
+def categoryDelete(request, category_id):
+    category = Category.objects.get(id=category_id)
+    category.delete()
+    return redirect('categ-page')

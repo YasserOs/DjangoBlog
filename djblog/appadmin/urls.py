@@ -18,7 +18,8 @@ urlpatterns = [
     path('user-block/<user_id>',adminView.userBlock , name='user-block'),
     path('user-promote/<user_id>',adminView.userPromote , name='user-promote'),
 
-    # path('categ-add',adminView.addCategory , name='categ-add'),
-    # path('categ-edit/<cat_id>',adminView.editCategory , name='categ-edit'),
-    # path('categ-del/<cat_id>',adminView.categoryDelete , name='categ-delete'),
+    path('categ-page',adminView.adminCategories , name='categ-page'),
+    path('categ-add',adminView.addCategory , name='categ-add'),
+    path('categ-edit/<category_id>',adminView.editCategory , name='categ-edit'),
+    path('categ-del/<category_id>',adminView.categoryDelete , name='categ-delete'),
 ]

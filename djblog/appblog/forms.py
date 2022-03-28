@@ -12,6 +12,14 @@ choices_list = []
 for i in choices:
     choices_list.append(i)
 
+class CategotyForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name',)
+        widgets = {
+            'name' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Write your name here!'}),
+        }
+
 class UserForm(UserCreationForm):
     class Meta:
         model = User
