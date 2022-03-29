@@ -1,54 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="d-flex" id="wrapper" style="background-color:gray;">
-        <!-- Sidebar-->
-        <div class="border-end bg-white" id="sidebar-wrapper" style="width:300px">
+   <div style="display: flex; flex-direction: row;"  >
+    <section class="col-md-2" >
+        <div class="border-end bg-white" id="sidebar-wrapper" ">
             <div class="sidebar-heading border-bottom bg-light h3 text-center">Categories</div>
             <div class="list-group list-group-flush d-flex">
                 {% for cat in categories %}
                 <div class="border border-light align-items-baseline">
-                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block; width:42%;text-decoration:none;border-radius:10px" href="{% url 'category' cat.name %}">{{ cat.name }}</a>
-                    <button class="btn btn-success" style="width:24%;font-size:0.7rem">Subscribe</button>
-                    <button class="btn btn-danger" style="width:30%;font-size:0.7rem">Unsubscribe</button>
+                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block;text-decoration:none;border-radius:10px" href="{% url 'category' cat.name %}">{{ cat.name }}</a>
+                    {% if user.is_authenticated %}      
+                    <button class="btn btn-success" style="font-size:0.5rem">Subscribe</button>
+                    <button class="btn btn-danger" style="font-size:0.5rem">Unsubscribe</button>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
         </div>
-            <!-- Page content-->
-            <div class="container" >
-                <div class="col-md-12 col-lg-12"  >
-                    {% for post in object_list %}
-                        <article class="post vt-post" style=" background-color:white;margin-bottom: 25px; margin-top:10px;">
-                            <div class="row" >
-                                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
-                                    <div class="post-type post-img">
-                                        <a href="#"><img src=" {{ post.image.url }} " class="img-responsive" style="max-height:300px" alt="{{ post.image }}"></a>
-                                    </div>
-                                    <div class="author-info author-info-3">
-                                        <ul class="list-inline">
-                                            <li>
-                                                <div class="info">
-                                                    <strong>{{ post.publish_date}}</strong></div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
-                                    <div class="caption">
-                                        <h3 class="md-heading"><a href="#">{{post.title}}</a></h3>
-                                        <p>{{post.body|slice:":200" }}</p>
-                                        <a href="{% url 'category' post.category %}"> {{post.category}}</a>
-                                        <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    {% endfor %}
-                </div>
-            </div>
-    </div>
+    </section>
+    <section class="details-card col-md-10" >
+        <div class="container">
+            <div class="row">
+            {% for post in object_list %}
 
+                <div class="col-md-5">
+                    <div class="card-content">
+                        <div class="card-img" >
+                            <img style=" height: 300px;"  src=" {{ post.image.url }} " alt="{{ post.image }}">                         
+                        </div>
+                        <div class="card-desc">
+                            <h3>{{ post.title }}</h3>
+                            <h5>{{ post.author }}</h5>
+                            <h5>{{ post.publish_date }}</h5>
+                            <p style="height: 80px; line-height: 20px; overflow: hidden;" >{{ post.body }}</p>
+                            {% if user.is_authenticated %}      
+                            <h6><a href="{% url 'category' post.category %}"> {{post.category}}</a><br>
+                            </h6>
+                            <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+
+            </div>
+        </div>
+    </section>
+   </div>
+    <!-- details card section starts from here -->
+    
 
 {% endblock %}
 

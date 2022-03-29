@@ -4,17 +4,23 @@
 
 {% block content %}
 
-<h1>{{ post.title }}</h1>
-<small>
-    By : {{ post.author.first_name }} 
-    {{ post.author.last_name }} / &ensp;
-    {{ post.publish_date }} - &emsp;
-   <small> <a class="btn btn-warning" href="{% url 'update_post' post.pk %}">Edit</a> </small>
-   &emsp;<small> <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete</a> </small> <br/>
-</small><br><hr>
-<br/>
-{{ post.body }}
-<br/><br/>
-<a href="{% url 'home' %}" class="btn btn-secondary">BACK</a>
+<section class="details-card col-md-12" >
+    
+    <div class="card-content">
+        <div class="card-img" style=" display:flex; justify-content: center;" >
+            <img style="width: 50%; border-radius: 20%; " src=" {{ post.image.url }} " alt="{{ post.image }}">                         
+        </div>
+        <div class="card-desc">
+            <h3>{{ post.title }}</h3>
+            <h5>{{ post.author }}</h5>
+            <h5>{{ post.publish_date }}</h5>
+            <p>{{ post.body }}</p>
+           
+            <a href="{% url 'home' %}" class="btn btn-secondary">BACK</a>
+        </div>
+    </div>
+
+
+</section>
 
 {% endblock %}

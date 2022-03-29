@@ -8,7 +8,7 @@ from django.views.generic import (
     DeleteView as delv, 
  )
 
-from .models import  Post, Category,Like,Dislike
+from .models import  Post, Category, Like, Dislike
 from .forms import   PostForm, EditForm,UserForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -67,36 +67,37 @@ def signupPg(request):
         return render(request, 'appblog/templates/signup.html', context)
 
 def likePost(request):
-    user=request.user
-    if user.is_authenticated:
-        if request.method=='POST':
-            post_id=request.POST.get('post_id')
-            post_object = Post.obgects.get(id=post_id)
-            if user in post_object.liked.all():
-                post_object.liked = post_object.liked.remove(user)
-                post_object.disliked = post_object.disliked.add(user)
-            else:
-                post_object.liked = post_object.liked.add(user)
-                post_object.disliked = post_object.disliked.remove(user)
+    user = request.user
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post_obj = Post.objects.get(id=post_id)
 
-            post_object.save()
-    return redirect('allposts')
+        if user in post_obj.liked.all():
+            post_obj.liked.remove(user)
+            post_obj.disliked.add(user)
+        else:
+            post_obj.liked.add(user)
+            post_obj.disliked.remove(user)
+
+        post_obj.save()
+    return redirect('home')
 
 def dislikePost(request):
-    user=request.user
-    if user.is_authenticated:
-        if request.method=='POST':
-            post_id=request.POST.get('post_id')
-            post_object = Post.obgects.get(id=post_id)
-            if user in post_object.liked.all():
-                post_object.liked = post_object.liked.remove(user)
-                post_object.disliked = post_object.disliked.add(user)
-            else:
-                post_object.liked = post_object.liked.add(user)
-                post_object.disliked = post_object.disliked.remove(user)
+    user = request.user
+    if request.method == 'POST':
+        post_id = request.POST.get('post_id')
+        post_obj = Post.objects.get(id=post_id)
 
-            post_object.save()
-    return redirect('allposts')
+        if user in post_obj.disliked.all():
+            post_obj.disliked.remove(user)
+            post_obj.liked.add(user)
+        else:
+            post_obj.disliked.add(user)
+            post_obj.liked.remove(user)
+
+        post_obj.save()
+
+    return redirect('home')
 
 def categories(request, catID):
    posts = Post.objects.filter(category=catID)

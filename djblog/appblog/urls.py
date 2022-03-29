@@ -18,4 +18,6 @@ urlpatterns = [
     path('signout',views.signoutPg , name='signout'),
     path('admin_panel',adminView.AdminPanel , name='admin_panel'),
     path('category/<str:cats>/',viewcategory , name='category'),   
+    path('like/', views.likePost, name='like-post'),
+    path('dislike/', views.dislikePost, name='dislike-post'),
 ]

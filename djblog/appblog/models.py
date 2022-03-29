@@ -26,8 +26,8 @@ class Post(models.Model):
     publish_date = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tags)
-    liked = models.ManyToManyField(User,default=None,blank=True,related_name='liked')
-    disliked = models.ManyToManyField(User,default=None,blank=True,related_name='disliked')
+    liked = models.ManyToManyField(User, blank=True, default=None, related_name= 'liked')
+    disliked = models.ManyToManyField(User, blank=True, default=None, related_name= 'disliked')
     image = models.ImageField(null=True , upload_to="images/")
     def __str__(self):
         return self.title + ' | ' + str(self.author)
@@ -48,17 +48,17 @@ class Comment(models.Model):
         return self.body
 
 class Like(models.Model):
-    #for each like user added to liked attribute on post and moved from disliked 
-    userlike=  models.ForeignKey(User,on_delete=models.CASCADE)
-    postliked= models.ForeignKey(Post, on_delete=models.CASCADE)
-    likevalue= models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    value = models.CharField(max_length=10)
+
     def __str__(self):
-        return self.likevalue
+        return self.value
 
 class Dislike(models.Model):
-    #for each dislike user added to disliked attribute on post and moved from like 
-    userdislike=  models.ForeignKey(User,on_delete=models.CASCADE)
-    postdisliked= models.ForeignKey(Post, on_delete=models.CASCADE)
-    dislikevalue= models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    value = models.CharField(max_length=10)
+
     def __str__(self):
-        return self.dislikevalue
+        return self.value 
