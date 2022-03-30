@@ -40,14 +40,12 @@ class PostForm(forms.ModelForm):
         }
 
 
+
 class CommentForm(forms.ModelForm):
+    body = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Write Comment ...'})) # to change the size of text area field
     class Meta:
         model = Comment
-        fields = ('body')
-        widgets = {
-            
-            'body' : forms.Textarea(attrs={'class': 'form-control'}),
-        }
+        fields = ('body',)
             
     
 class EditForm(forms.ModelForm):

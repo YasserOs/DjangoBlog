@@ -36,7 +36,7 @@
                             {% if user.is_authenticated %}      
                             <h6><a href="{% url 'category' post.category.pk %}"> {{post.category}}</a><br>
                             </h6>
-                            <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+                            <a href="{% url 'post' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
                             {% endif %}
 
                         </div>

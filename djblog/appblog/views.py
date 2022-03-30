@@ -115,12 +115,8 @@ def categories(request, catID):
    return render (request,'home.html',context)
 
 def viewcategory(request,cats):
-     category_posts = Post.objects.filter(category=cats)
-     return render (request,'categories.html',{'cats':cats.title(),'category_posts':category_posts})
-
-
-
-
+     category_posts = Post.objects.filter(category=Category.objects.get(id=cats))
+     return render (request,'categories.html',{'category_posts': category_posts, 'cats':cats.title()})
 
 
 
@@ -161,13 +157,25 @@ class DeletePost(delv):
 
 
 
-def add_comment(request,_post):
+
+def showPost(request, postID):
+    post = Post.objects.get(id = postID)
+    categories = Category.objects.all()
+    # To enter a new comment
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            comment_form.save()
-            return redirect('article_detail')
-    comments = Comment.objects.get(post=_post)        
-    context = {'comments': comment_form}
-    return render(request, 'article_detail.html', context)    
+            instance = comment_form.save(commit=False) # commit=False means not save yet
+            instance.user = request.user # send user name with comment
+            instance.post = post # make relation between post and comment
+            instance.save()
+            return redirect('article_detail', postID = post.id)
+    else:
+        comment_form = CommentForm()
+    context = {
+        'post': post,   
+        'comment_form': comment_form,
+        'categories': categories,
+        }
+    return render(request, 'article_detail.html', context)      
        
