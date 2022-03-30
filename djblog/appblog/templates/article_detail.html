@@ -15,6 +15,18 @@
             <h5>{{ post.author }}</h5>
             <h5>{{ post.publish_date }}</h5>
             <p>{{ post.body }}</p>
+            
+           <!-- like  and dislike -->
+
+            <div class="d-flex flex-row-reverse">
+                <div class="col-md-4">
+                <i class="fa fa-thumbs-down" style="font-size:48px;"></i>
+                <i class="fa fa-thumbs-down" style="font-size:48px;color:blue"></i>
+                <i class="fa fa-thumbs-up" style="font-size:48px;"></i>
+                <i class="fa fa-thumbs-up" style="font-size:48px;color:blue"></i>
+                </div>
+            </div>
+            <br>
            
             <a href="{% url 'home' %}" class="btn btn-secondary">BACK</a>
         </div>
@@ -22,11 +34,13 @@
        
 </section>
 </div>
+
+
+
 <!-- Comments -->
 <div class="row d-flex justify-content-center mt-2">
-    <div class="col-md-10">
         {% for comment in post.comment_set.all %}
-
+        <div class="col-md-10">
         <div class="card mt-1">
             <div style="display: flex; margin-left: 10px; margin-top: 5px;">
                 <div>
@@ -46,13 +60,14 @@
 </div>
 <!-- Enter new Comment -->
 {% load crispy_forms_tags %}
-<div class="row d-flex justify-content-center mt-2 mb-5 col-md-10">
-    <form method="POST"> {% csrf_token %}
+<div class="row d-flex justify-content-center mt-2 mb-5">
+    <div class="col-md-10"><form method="POST"> {% csrf_token %}
         {{ comment_form|crispy }}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-1">
             <button class="btn btn-success" type="Save">Comment</button>
         </div>
     </form>
+</div>
 </div>
 
 

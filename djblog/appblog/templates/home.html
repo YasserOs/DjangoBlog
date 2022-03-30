@@ -11,9 +11,9 @@
                     <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block;text-decoration:none;border-radius:10px" href="{% url 'category' cat.id %}">{{ cat.name }}</a>
                     {% if user.is_authenticated %}      
                     {% if not user in cat.subbed_users.all %}
-                    <a href="{% url 'Subscribe' cat.id %}" class="btn btn-success" role="button" aria-disabled="true" style="width:24%;font-size:0.7rem">Subscribe</a>
+                    <a href="{% url 'Subscribe' cat.id %}" class="btn btn-success" role="button" aria-disabled="true" style="width:45%;font-size:0.7rem">Subscribe</a>
                     {% else %}
-                    <a href="{% url 'Unsubscribe' cat.id %}" class="btn btn-danger" role="button" aria-disabled="true" style="width:30%;font-size:0.7rem">Unsubscribe</a>
+                    <a href="{% url 'Unsubscribe' cat.id %}" class="btn btn-danger" role="button" aria-disabled="true" style="width:45%;font-size:0.7rem">Unsubscribe</a>
                     {% endif %}
                     {% endif %}
                 </div>
