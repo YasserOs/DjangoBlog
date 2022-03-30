@@ -2,21 +2,21 @@
 Blog Created With Python Django
 For Python Programming Course - ITI (Information Technology Institute) - Nasr City
 
-### Supervised By:
-#### Eng. Mohamed Ramadan @mohamed-ramdan
+## Supervised By:
+# Eng. Mohamed Ramadan @mohamed-ramdan
 
 
-### Contributers
+## Contributers
 
-##### 1. Yasser Ossama 
+# 1. Yasser Ossama 
 
-##### 2. Amr Ahmed
+# 2. Amr Ahmed
 
-##### 3. Mohamed Sambo
+# 3. Mohamed Sambo
 
-##### 4. Mohamed Elgarhy
+# 4. Mohamed Elgarhy
 
-##### 5  Mahmoud Shaaban
+# 5  Mahmoud Shaaban
 
 ### what can users do
 
@@ -27,8 +27,6 @@ For Python Programming Course - ITI (Information Technology Institute) - Nasr Ci
 - logged in admin user can do crud operations on normal users , post and the other project parts except controlling other admins
 
 * logged in super user can control anything in the blog even admins but can't control other super users
-
-### [ Users app ]
 
 #### Users app handles all the following:
 
