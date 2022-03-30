@@ -17,6 +17,10 @@ urlpatterns = [
     path('signout',views.signoutPg , name='signout'),
     path('admin_panel',adminView.AdminPanel , name='admin_panel'),
     path('category/<cats>',views.viewcategory , name='category'),   
+<<<<<<< HEAD
     path('post/<postID>', views.showPost, name="post"),
 
+=======
+    path('article/<int:pk>', views.add_comment, name='add_comment'),
+>>>>>>> 5978ebbd92e6f861cec72c1adcf011ea00abdd86
 ]

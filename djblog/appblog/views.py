@@ -116,7 +116,15 @@ def categories(request, catID):
 
 def viewcategory(request,cats):
      category_posts = Post.objects.filter(category=Category.objects.get(id=cats))
+<<<<<<< HEAD
      return render (request,'categories.html',{'category_posts': category_posts, 'cats':cats.title()})
+=======
+     return render (request,'categories.html',{'cats':cats.title(),'category_posts':category_posts})
+
+
+
+
+>>>>>>> 5978ebbd92e6f861cec72c1adcf011ea00abdd86
 
 
 
