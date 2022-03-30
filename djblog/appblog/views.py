@@ -179,7 +179,12 @@ def showPost(request, postID):
             instance.user = request.user # send user name with comment
             instance.post = post # make relation between post and comment
             instance.save()
-            return redirect('article_detail', postID = post.id)
+            context = {
+            'post': post,   
+            'comment_form': comment_form,
+            'categories': categories,
+            }
+            return render(request, 'article_detail.html', context)
     else:
         comment_form = CommentForm()
     context = {
