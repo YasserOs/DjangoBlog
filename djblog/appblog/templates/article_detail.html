@@ -19,6 +19,45 @@
             <a href="{% url 'home' %}" class="btn btn-secondary">BACK</a>
         </div>
     </div>
+     <!-- Comments -->
+     <!-- <div class="row d-flex justify-content-center mt-2">      
+        <div class="col-md-11">
+            {% for comment in post.comment_set.all %}
+            <div class="card mt-1">
+                <div style="display: flex; margin-left: 10px; margin-top: 5px;">
+                        <div>
+                            <img src="https://i.imgur.com/hczKIze.jpg" width="40" class="user-img rounded-circle mr-2">
+                        </div> 
+                        <div>
+                            <a class="h5" href="" style="text-decoration: none;">  {{ comment.user }}</a><br/>
+                            <small style="font-size: x-small;">  {{ comment.comment_data }}</small>
+                        </div>
+                </div>
+                <p style="text-align: justify; margin-left: 20px; margin-top: 5px;">{{ comment.body }}</p>
+            </div>  
+            {% endfor %}
+        </div>
+    </div> -->
+    <div class="container1 justify-content-center col-md-12 mt-2 border-left border-right">
+        <div class="d-flex justify-content-center col-md-12">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class=" col-md-11 pt-3 pb-2"> <input type="text" name="text" placeholder="Add Comment" class="form-control addtxt"> </div>
+            <div class="col-md-1 pt-3 pb-2"><a href="{% url 'add_comment' post.pk %}" ><input type="submit" value="Post" ></a></div>
+        </div>
+        </form>
+        {% if Comments %}
+        {% for comment in Comments %}
+
+        <div class="d-flex justify-content-center py-2 col-md-11">
+            <div class="col-md-2">{{ comment.user }}</div>
+            <div class="second py-2 text1 col-md-10">{{ comment.body }}</div>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        
+    </div>
 
 
 </section>

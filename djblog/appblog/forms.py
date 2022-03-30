@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import widgets
-from .models import Post, Category
+from .models import Post, Category, Comment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -38,6 +38,17 @@ class PostForm(forms.ModelForm):
             'category' : forms.Select(choices=choices_list, attrs={'class': 'form-control'}),
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body')
+        widgets = {
+            
+            'body' : forms.Textarea(attrs={'class': 'form-control'}),
+        }
+            
     
 class EditForm(forms.ModelForm):
     class Meta:

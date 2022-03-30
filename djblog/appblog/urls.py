@@ -18,4 +18,5 @@ urlpatterns = [
     path('signout',views.signoutPg , name='signout'),
     path('admin_panel',adminView.AdminPanel , name='admin_panel'),
     path('category/<int:cats>/',views.viewcategory , name='category'),   
+    path('article/<int:pk>', views.add_comment, name='add_comment'),
 ]

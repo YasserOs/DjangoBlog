@@ -1,5 +1,9 @@
+from cgitb import text
+from multiprocessing import context
 from unicodedata import category
-from django.shortcuts import render 
+from django.shortcuts import get_object_or_404, render 
+from django.contrib.auth.models import User
+
 from django.views.generic import (
     ListView as lv, 
     DetailView as dv,
@@ -8,8 +12,8 @@ from django.views.generic import (
     DeleteView as delv, 
  )
 
-from .models import  Post, Category, Like, Dislike
-from .forms import   PostForm, EditForm,UserForm
+from .models import  Post, Category, Like, Dislike, Comment
+from .forms import   PostForm, EditForm,UserForm, CommentForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -155,3 +159,15 @@ class DeletePost(delv):
 
 
 
+
+
+def add_comment(request,_post):
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_form.save()
+            return redirect('article_detail')
+    comments = Comment.objects.get(post=_post)        
+    context = {'comments': comment_form}
+    return render(request, 'article_detail.html', context)    
+       
