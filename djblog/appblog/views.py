@@ -116,17 +116,19 @@ def categories(request, catID):
 
 def viewcategory(request,cats):
      category_posts = Post.objects.filter(category=Category.objects.get(id=cats))
-<<<<<<< HEAD
      return render (request,'categories.html',{'category_posts': category_posts, 'cats':cats.title()})
-=======
-     return render (request,'categories.html',{'cats':cats.title(),'category_posts':category_posts})
 
+def Subscribe(request,catid):
+    category = Category.objects.get(id=catid)
+    category.subbed_users.add(request.user)
+    category.save()
+    return redirect('home')
 
-
-
->>>>>>> 5978ebbd92e6f861cec72c1adcf011ea00abdd86
-
-
+def Unsubscribe(request,catid):
+    category = Category.objects.get(id=catid)
+    category.subbed_users.remove(request.user)
+    category.save()
+    return redirect('home')
 
 
 

@@ -10,8 +10,11 @@
                 <div class="border border-light align-items-baseline">
                     <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block;text-decoration:none;border-radius:10px" href="{% url 'category' cat.id %}">{{ cat.name }}</a>
                     {% if user.is_authenticated %}      
-                    <button class="btn btn-success" style="font-size:0.5rem">Subscribe</button>
-                    <button class="btn btn-danger" style="font-size:0.5rem">Unsubscribe</button>
+                    {% if not user in cat.subbed_users.all %}
+                    <a href="{% url 'Subscribe' cat.id %}" class="btn btn-success" role="button" aria-disabled="true" style="width:24%;font-size:0.7rem">Subscribe</a>
+                    {% else %}
+                    <a href="{% url 'Unsubscribe' cat.id %}" class="btn btn-danger" role="button" aria-disabled="true" style="width:30%;font-size:0.7rem">Unsubscribe</a>
+                    {% endif %}
                     {% endif %}
                 </div>
                 {% endfor %}

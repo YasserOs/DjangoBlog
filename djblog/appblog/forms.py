@@ -46,13 +46,6 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
-<<<<<<< HEAD
-=======
-        widgets = {
-            
-            'body' : forms.Textarea(attrs={'class': 'form-control'}),
-        }
->>>>>>> 5978ebbd92e6f861cec72c1adcf011ea00abdd86
             
     
 class EditForm(forms.ModelForm):
