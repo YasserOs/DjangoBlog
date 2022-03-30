@@ -2,8 +2,9 @@
 Blog Created With Python Django
 For Python Programming Course - ITI (Information Technology Institute) - Nasr City
 
+
 ## Supervised By:
-# Eng. Mohamed Ramadan @mohamed-ramdan
+ Eng. Mohamed Ramadan @mohamed-ramdan
 
 
 ## Contributers
