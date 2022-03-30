@@ -130,6 +130,61 @@ def Unsubscribe(request,catid):
     category.save()
     return redirect('home')
 
+def like(request,postid):
+    post = Post.objects.get(id=postid)
+    post.liked.add(request.user)
+    post.save()
+    categories = Category.objects.all()
+    comment_form = CommentForm(request.POST)
+    context = {
+        'post': post,   
+        'comment_form': comment_form,
+        'categories': categories,
+        }
+    return render(request, 'article_detail.html', context)
+
+def unlike(request,postid):
+    post = Post.objects.get(id=postid)
+    post.liked.remove(request.user)
+    post.save()
+    categories = Category.objects.all()
+    comment_form = CommentForm(request.POST)
+    context = {
+        'post': post,   
+        'comment_form': comment_form,
+        'categories': categories,
+        }
+    return render(request, 'article_detail.html', context)
+
+def dislike(request,postid):
+    post = Post.objects.get(id=postid)
+    post.disliked.add(request.user)
+    post.save()
+    categories = Category.objects.all()
+    comment_form = CommentForm(request.POST)
+    context = {
+        'post': post,   
+        'comment_form': comment_form,
+        'categories': categories,
+        }
+    return render(request, 'article_detail.html', context)
+
+def undislike(request,postid):
+    post = Post.objects.get(id=postid)
+    post.disliked.remove(request.user)
+    post.save()
+    categories = Category.objects.all()
+    comment_form = CommentForm(request.POST)
+    context = {
+        'post': post,   
+        'comment_form': comment_form,
+        'categories': categories,
+        }
+    return render(request, 'article_detail.html', context)
+
+
+
+
 
 
 

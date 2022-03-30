@@ -20,10 +20,16 @@
 
             <div class="d-flex flex-row-reverse">
                 <div class="col-md-4">
-                <i class="fa fa-thumbs-down" style="font-size:48px;"></i>
-                <i class="fa fa-thumbs-down" style="font-size:48px;color:blue"></i>
-                <i class="fa fa-thumbs-up" style="font-size:48px;"></i>
-                <i class="fa fa-thumbs-up" style="font-size:48px;color:blue"></i>
+                {% if not user in post.disliked.all %}
+                <a href="{% url 'dislike' post.id %}" class="fa fa-thumbs-down" style="font-size:48px;color:gray"></a>
+                {% else %}
+                <a href="{% url 'undislike' post.id %}" class="fa fa-thumbs-down" style="font-size:48px;color:red"></a>
+                {% endif %}
+                {% if not user in post.liked.all %}
+                <a href="{% url 'like' post.id %}" class="fa fa-thumbs-up" style="font-size:48px;color:gray"></a>
+                {% else %}
+                <a href="{% url 'unlike' post.id %}" class="fa fa-thumbs-up" style="font-size:48px;color:blue"></a>
+                {% endif %}
                 </div>
             </div>
             <br>

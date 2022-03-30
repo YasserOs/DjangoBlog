@@ -20,4 +20,8 @@ urlpatterns = [
     path('post/<postID>', views.showPost, name="post"),
     path('Subscribe/<catid>',views.Subscribe , name='Subscribe'),
     path('Unsubscribe/<catid>',views.Unsubscribe , name='Unsubscribe'),
+    path('like/<postid>',views.like , name='like'),
+    path('unlike/<postid>',views.unlike , name='unlike'),
+    path('dislike/<postid>',views.dislike , name='dislike'),
+    path('undislike/<postid>',views.undislike , name='undislike'),
 ]
