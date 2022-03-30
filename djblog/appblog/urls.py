@@ -7,7 +7,7 @@ from .views import AddPostView, DetailView, UpdatePost, DeletePost  , CategoryVi
 urlpatterns = [
     # path('', views.home, name="home"),
     path('', views.home, name="home"),
-    path('home/cat/<catID>', views.categories, name="categories"),
+   # path('home/cat/<catID>', views.categories, name="categories"),
     path('article/<int:pk>', DetailView.as_view(), name="article_detail"),
     path('add_post/', AddPostView.as_view(), name="add_post"),
     path('add-category/', CategoryView.as_view(), name="add_category"),
@@ -17,7 +17,5 @@ urlpatterns = [
     path('signup',views.signupPg , name='signup'),
     path('signout',views.signoutPg , name='signout'),
     path('admin_panel',adminView.AdminPanel , name='admin_panel'),
-    path('category/<str:cats>/',viewcategory , name='category'),   
-    path('like/', views.likePost, name='like-post'),
-    path('dislike/', views.dislikePost, name='dislike-post'),
+    path('category/<int:cats>/',views.viewcategory , name='category'),   
 ]

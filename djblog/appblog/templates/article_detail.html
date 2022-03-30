@@ -3,12 +3,12 @@
 {% block title %} {{ post.title_tag }}{% endblock %}
 
 {% block content %}
-
-<section class="details-card col-md-12" >
+<div class="d-flex justify-content-center">
+<section class="details-card col-md-10 text-center" >
     
     <div class="card-content">
         <div class="card-img" style=" display:flex; justify-content: center;" >
-            <img style="width: 50%; border-radius: 20%; " src=" {{ post.image.url }} " alt="{{ post.image }}">                         
+            <img class="w-75" src=" {{ post.image.url }} " alt="{{ post.image }}">                         
         </div>
         <div class="card-desc">
             <h3>{{ post.title }}</h3>
@@ -22,5 +22,6 @@
 
 
 </section>
+</div>
 
 {% endblock %}

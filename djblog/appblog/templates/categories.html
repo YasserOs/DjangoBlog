@@ -2,24 +2,37 @@
 
 {% block content %}
 
-
-<h1>Categories</h1>
-
 {% if category_posts %}
-<h2> {{ cats }} </h2>
-{% for post in category_posts %}
 
-<h3>
-    <a href="{% url 'article_detail' post.pk %}">
-        {{post.title}}
-    </a>
-     - {{post.author.first_name}} {{post.author.last_name}}
-</h3>
-<p>{{ post.body | linebreaks | truncatewords:100 }}</p>
-{% endfor %}
+<section class="details-card col-md-12" >
+    <div class="container">
+        <div class="row">
+        {% for post in category_posts %}
 
-{% else %}
-<h4>there is no article related to this category</h4>
+            <div class="col-md-6 mb-4">
+                <div class="card-content">
+                    <div class="card-img" >
+                        <img style=" height: 300px;"  src=" {{ post.image.url }} " alt="{{ post.image }}">                         
+                    </div>
+                    <div class="card-desc">
+                        <h3>{{ post.title }}</h3>
+                        <h5>{{ post.author }}</h5>
+                        <h5>{{ post.publish_date }}</h5>
+                        <p style="height: 80px; line-height: 20px; overflow: hidden;" >{{ post.body }}</p>
+                        <h6><a href="#"> {{post.category}}</a><br>
+                        </h6>
+                        <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
+
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+          <a href="{% url 'home' %}" class="btn btn-secondary w-25">BACK</a>
+
+
+        </div>
+    </div>
+</section>
 
 {% endif %}
 {% endblock content %}

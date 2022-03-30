@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   <div style="display: flex; flex-direction: row;"  >
+   <div class="d-flex flex-row" >
     <section class="col-md-2" >
         <div class="border-end bg-white" id="sidebar-wrapper" ">
             <div class="sidebar-heading border-bottom bg-light h3 text-center">Categories</div>
             <div class="list-group list-group-flush d-flex">
                 {% for cat in categories %}
                 <div class="border border-light align-items-baseline">
-                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block;text-decoration:none;border-radius:10px" href="{% url 'category' cat.name %}">{{ cat.name }}</a>
+                    <a class=" list-group-item-action list-group-item-light p-1 my-2" style="display:inline-block;text-decoration:none;border-radius:10px" href="{% url 'category' cat.pk %}">{{ cat.name }}</a>
                     {% if user.is_authenticated %}      
                     <button class="btn btn-success" style="font-size:0.5rem">Subscribe</button>
                     <button class="btn btn-danger" style="font-size:0.5rem">Unsubscribe</button>
@@ -23,7 +23,7 @@
             <div class="row">
             {% for post in object_list %}
 
-                <div class="col-md-5">
+                <div class="col-md-5 mb-4">
                     <div class="card-content">
                         <div class="card-img" >
                             <img style=" height: 300px;"  src=" {{ post.image.url }} " alt="{{ post.image }}">                         
@@ -34,7 +34,7 @@
                             <h5>{{ post.publish_date }}</h5>
                             <p style="height: 80px; line-height: 20px; overflow: hidden;" >{{ post.body }}</p>
                             {% if user.is_authenticated %}      
-                            <h6><a href="{% url 'category' post.category %}"> {{post.category}}</a><br>
+                            <h6><a href="{% url 'category' post.category.pk %}"> {{post.category}}</a><br>
                             </h6>
                             <a href="{% url 'article_detail' post.pk %}" class="btn btn-primary">Read More &rarr;</a>
                             {% endif %}
